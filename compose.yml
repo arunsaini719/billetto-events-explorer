@@ -1,0 +1,41 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: ["sh", "-c", "bin/rails db:prepare && exec bin/rails server -b 0.0.0.0"]
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      PGHOST: postgres
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: billetto_local
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - .:/rails
+      - rails_tmp:/rails/tmp
+      - rails_log:/rails/log
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: billetto_local
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "127.0.0.1", "-U", "postgres", "-d", "postgres"]
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+volumes:
+  postgres_data:
+  rails_tmp:
+  rails_log:
