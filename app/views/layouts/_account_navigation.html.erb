@@ -1,7 +1,8 @@
 <nav aria-label="Account">
-  <span data-clerk-target="guest">
+  <% if clerk_signed_in? %>
+    <button type="button" data-clerk-target="logout" data-action="clerk#signOut" disabled>Log out</button>
+  <% else %>
     <%= link_to "Sign in", sign_in_path, data: { turbo: false } %>
     <%= link_to "Sign up", sign_up_path, data: { turbo: false } %>
-  </span>
-  <button type="button" data-clerk-target="logout" data-action="clerk#signOut" hidden>Log out</button>
+  <% end %>
 </nav>

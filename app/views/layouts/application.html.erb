@@ -9,13 +9,13 @@
 
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= render "layouts/clerk_scripts" if clerk_frontend_configured? %>
+    <%= render "layouts/clerk_scripts" if clerk_browser_needed? %>
     <%= javascript_importmap_tags %>
   </head>
 
   <%= tag.body(**page_body_attributes) do %>
     <%= render "layouts/account_navigation" if show_account_navigation? %>
-    <% if clerk_frontend_configured? %>
+    <% if clerk_browser_needed? %>
       <p role="alert" data-clerk-target="error" hidden></p>
     <% end %>
     <main><%= yield %></main>

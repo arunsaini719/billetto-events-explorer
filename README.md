@@ -18,8 +18,9 @@ Create a development app in the [Clerk Dashboard](https://dashboard.clerk.com/).
 
 - `CLERK_PUBLISHABLE_KEY`: copy the `pk_test_...` value.
 - `CLERK_FRONTEND_API_URL`: copy the HTTPS origin from either script URL, without the `/npm/...` path.
+- `CLERK_SECRET_KEY`: copy the `sk_test_...` key for the Ruby SDK. Keep it server-side.
 
-Add both to `.env`, run `docker compose up -d`, then open [localhost:3000/sign-up](http://localhost:3000/sign-up). You don't need the Clerk secret key for the browser setup.
+Add these to `.env`, run `docker compose up --build -d`, then open [localhost:3000/sign-up](http://localhost:3000/sign-up). Rails uses the verified Clerk session to show the right account links, so use all three settings to test sign-in and logout.
 
 ```sh
 docker compose exec web bin/rails test  # Run tests

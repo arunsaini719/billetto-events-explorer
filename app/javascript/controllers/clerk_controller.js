@@ -16,14 +16,14 @@ async function initializeClerk() {
 }
 
 export default class extends Controller {
-  static targets = ["guest", "logout", "form", "error"]
+  static targets = ["logout", "form", "error"]
 
   async connect() {
     try {
       clerkInitialization ??= initializeClerk()
       this.clerk = await clerkInitialization
       this.errorTarget.hidden = true
-      this.updateNavigation()
+      if (this.hasLogoutTarget) this.logoutTarget.disabled = false
       if (this.hasFormTarget) this.mountForm()
     } catch {
       this.showError("Clerk could not load. Try refreshing the page.")
@@ -32,14 +32,6 @@ export default class extends Controller {
 
   disconnect() {
     this.unmount()
-  }
-
-  updateNavigation() {
-    if (!this.hasGuestTarget) return
-
-    this.guestTarget.hidden = this.clerk.isSignedIn
-    this.logoutTarget.hidden = !this.clerk.isSignedIn
-    this.logoutTarget.disabled = false
   }
 
   mountForm() {
