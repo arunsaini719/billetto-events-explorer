@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   get "sign-up", to: "sessions#sign_up", as: :sign_up
 
   resources :events, only: [] do
-    resource :vote, only: :update
+    resource :vote, only: [:update, :destroy]
   end
 end

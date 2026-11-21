@@ -1,5 +1,5 @@
 module Voting
   def self.subscriptions
-    { ProjectCurrentVote => [ EventUpvoted ] }
+    { ProjectCurrentVote => [ EventUpvoted, EventDownvoted, EventVoteRemoved ] }
   end
 end
