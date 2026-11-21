@@ -10,7 +10,18 @@ docker compose up --build
 
 Open [localhost:3000](http://localhost:3000). Compose starts Postgres and sets up the database for you.
 
-You don't need an `.env` file to boot. For the Billetto API key, use [`.env.example`](.env.example) as a template. Keep your local `.env` out of Git.
+You don't need an `.env` file to boot. Use [`.env.example`](.env.example) as a template and keep your local `.env` out of Git.
+
+### Import Billetto events
+
+Set `BILLETTO_API_KEYPAIR` in `.env` as `access_key:secret`, then run:
+
+```sh
+docker compose up -d
+docker compose exec web bin/rails billetto:import
+```
+
+Running the import again updates existing listings rather than duplicating them. It skips invalid listings and saves one page at a time, so an API failure doesn't undo earlier pages.
 
 ### Set up Clerk
 
