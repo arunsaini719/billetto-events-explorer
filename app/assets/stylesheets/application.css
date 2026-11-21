@@ -8,3 +8,29 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+.auth-layout {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 100dvh;
+  margin: 0;
+}
+
+.auth-layout > main {
+  display: grid;
+  flex: 1;
+  place-items: center;
+}
+
+.auth-page {
+  box-sizing: border-box;
+  inline-size: min(100%, 32rem);
+  padding: 1rem;
+  text-align: center;
+}
+
+.auth-form {
+  display: flex;
+  justify-content: center;
+  text-align: start;
+}
