@@ -5,19 +5,22 @@ module Billetto
   module EventAttributes
     class << self
       def from_api(row)
-        return unless row.is_a?(Hash)
+        unless row.is_a?(Hash)
+          return InvalidListing.new(billetto_event_id: nil, message: "Expected a listing object")
+        end
 
+        billetto_event_id = text(row["id"])&.strip
         {
-          billetto_event_id: text(row["id"])&.strip,
+          billetto_event_id:,
           title: text(row["title"])&.strip,
           description: text(row["description"]),
-          starts_at: parse_timestamp(row["startdate"]),
-          ends_at: parse_timestamp(row["enddate"]),
+          starts_at: parse_timestamp(row["startdate"], "startdate"),
+          ends_at: parse_timestamp(row["enddate"], "enddate"),
           image_url: https_url(row["image_link"]),
           billetto_url: https_url(row["url"])
         }
-      rescue ArgumentError, TypeError
-        nil
+      rescue ArgumentError => error
+        InvalidListing.new(billetto_event_id:, message: error.message)
       end
 
       private
@@ -26,8 +29,10 @@ module Billetto
         value if value.is_a?(String)
       end
 
-      def parse_timestamp(value)
+      def parse_timestamp(value, field)
         DateTime.iso8601(value).to_time.utc unless value.nil?
+      rescue ArgumentError, TypeError
+        raise ArgumentError, "#{field} is not a valid ISO 8601 timestamp"
       end
 
       def https_url(value)
