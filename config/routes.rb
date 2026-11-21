@@ -12,4 +12,8 @@ Rails.application.routes.draw do
   root "events#index"
   get "sign-in", to: "sessions#sign_in", as: :sign_in
   get "sign-up", to: "sessions#sign_up", as: :sign_up
+
+  resources :events, only: [] do
+    resource :vote, only: :update
+  end
 end

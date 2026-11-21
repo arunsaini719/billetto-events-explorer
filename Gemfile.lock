@@ -452,6 +452,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  arkency-command_bus (~> 0.4)
   bootsnap
   brakeman
   bundler-audit
