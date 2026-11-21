@@ -12,7 +12,7 @@ class CreateEvents < ActiveRecord::Migration[8.1]
       t.timestamps
 
       t.index :billetto_event_id, unique: true
-      t.index [:starts_at, :id]
+      t.index [ :starts_at, :id ]
     end
   end
 end
