@@ -19,6 +19,7 @@ gem "jbuilder"
 
 gem "clerk-sdk-ruby", "~> 9.0", require: "clerk"
 gem "httparty", "~> 0.25"
+gem "pagy", "~> 43.8"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
