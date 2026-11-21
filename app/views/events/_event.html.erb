@@ -19,6 +19,9 @@
         <%= link_to "View on Billetto", event.billetto_url, target: "_blank", rel: "noopener",
               class: "mt-auto align-self-start fw-semibold text-decoration-none" %>
       <% end %>
+
+      <%= render "events/votes", event: event, summary: @vote_summaries.fetch(event.id),
+            viewer_reaction: @viewer_reactions[event.id] %>
     </div>
   </div>
 </article>

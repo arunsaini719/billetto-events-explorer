@@ -1,0 +1,10 @@
+<div id="<%= dom_id(event, :votes) %>" class="mt-3 pt-3 border-top">
+  <div class="d-inline-flex" role="group" aria-label="Votes for <%= event.title %>">
+    <%= render "events/vote_reaction", event: event, reaction: "liked", label: "Like",
+          icon: "hand-thumbs-up", count: summary.likes, active: viewer_reaction == "liked",
+          edge: "rounded-start-pill rounded-end-0 border-end-0" %>
+    <%= render "events/vote_reaction", event: event, reaction: "disliked", label: "Dislike",
+          icon: "hand-thumbs-down", count: summary.dislikes, active: viewer_reaction == "disliked",
+          edge: "rounded-end-pill rounded-start-0" %>
+  </div>
+</div>
