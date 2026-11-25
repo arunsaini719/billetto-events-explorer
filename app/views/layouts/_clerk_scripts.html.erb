@@ -1,0 +1,6 @@
+<%= tag.link rel: "preconnect", href: clerk_frontend_origin, crossorigin: "anonymous" %>
+<%= javascript_include_tag "#{clerk_frontend_origin}/npm/@clerk/ui@1/dist/ui.browser.js",
+      defer: true, crossorigin: "anonymous", data: { turbo_track: "reload" } %>
+<%= javascript_include_tag "#{clerk_frontend_origin}/npm/@clerk/clerk-js@6/dist/clerk.browser.js",
+      defer: true, crossorigin: "anonymous",
+      data: { clerk_publishable_key: clerk_publishable_key, turbo_track: "reload" } %>

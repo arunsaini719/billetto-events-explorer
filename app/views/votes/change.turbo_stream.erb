@@ -1,0 +1,2 @@
+<%= turbo_stream.replace dom_id(@event, :votes), partial: "events/votes",
+      locals: { event: @event, summary: @vote_summary, viewer_reaction: @viewer_reaction } %>

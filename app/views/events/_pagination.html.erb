@@ -1,0 +1,5 @@
+<div id="events-pagination" class="pt-4 text-center">
+  <% if @pagy.next %>
+    <%= link_to "Load more events", @pagy.page_url(@pagy.next), class: "btn btn-outline-primary px-4", data: { turbo_stream: true } %>
+  <% end %>
+</div>

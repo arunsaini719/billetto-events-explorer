@@ -1,0 +1,17 @@
+<% content_for :title, "#{title} | Billetto Events Explorer" %>
+<% content_for :head do %>
+  <meta name="turbo-cache-control" content="no-cache">
+<% end %>
+
+<section class="auth-page" aria-label="<%= title %>">
+  <% if clerk_frontend_configured? %>
+    <div class="auth-form"
+         data-clerk-target="form"
+         data-mode="<%= mode %>"
+         data-sign-in-url="<%= sign_in_path %>"
+         data-sign-up-url="<%= sign_up_path %>"
+         data-return-url="<%= root_path %>"></div>
+  <% else %>
+    <p>Clerk is not configured. Add the browser settings to <code>.env</code> and restart the app.</p>
+  <% end %>
+</section>

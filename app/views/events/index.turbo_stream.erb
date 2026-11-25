@@ -1,0 +1,5 @@
+<%= turbo_stream.append "event-listings" do %>
+  <%= render @events %>
+<% end %>
+
+<%= turbo_stream.replace "events-pagination", partial: "events/pagination" %>

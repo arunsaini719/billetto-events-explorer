@@ -1,0 +1,16 @@
+<% icon_and_count = capture do %>
+  <span class="bi bi-<%= icon %><%= "-fill" if active %>" aria-hidden="true"></span>
+  <span data-vote-count="<%= reaction %>"><%= count %></span>
+  <span class="visually-hidden"><%= count == 1 ? label.downcase : "#{label.downcase}s" %></span>
+<% end %>
+
+<% if current_clerk_user_id %>
+  <%= button_to event_vote_path(event), method: (active ? :delete : :put),
+        params: (active ? {} : { reaction: reaction }), form_class: "d-flex",
+        class: class_names("btn btn-sm d-inline-flex align-items-center gap-2 px-3", edge, active ? "btn-primary" : "btn-outline-secondary"),
+        aria: { label: label, pressed: active }, title: (active ? "Remove #{label.downcase}" : label) do %>
+    <%= icon_and_count %>
+  <% end %>
+<% else %>
+  <%= tag.span icon_and_count, class: class_names("d-inline-flex align-items-center gap-2 px-3 py-1 border small text-body-secondary", edge) %>
+<% end %>
